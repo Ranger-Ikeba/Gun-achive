@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://bre7qdy14vnhr"]
+
+[ext_resource type="Script" uid="uid://d253lq65hd3kc" path="res://scripts/world.gd" id="1"]
+[ext_resource type="Script" uid="uid://onxemvwihvf0" path="res://scripts/hud.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://da8rwjq7o1x1k" path="res://scenes/city_map.tscn" id="10"]
+
+[sub_resource type="ProceduralSkyMaterial" id="sky"]
+sky_top_color = Color(0.35, 0.55, 0.8, 1)
+sky_horizon_color = Color(0.85, 0.88, 0.92, 1)
+ground_bottom_color = Color(0.25, 0.3, 0.25, 1)
+ground_horizon_color = Color(0.55, 0.58, 0.55, 1)
+sun_angle_max = 20.0
+sun_curve = 0.12
+
+[sub_resource type="Sky" id="skyres"]
+sky_material = SubResource("sky")
+
+[sub_resource type="Environment" id="env"]
+background_mode = 2
+sky = SubResource("skyres")
+ambient_light_source = 3
+ambient_light_energy = 0.9
+tonemap_mode = 2
+tonemap_white = 4.0
+fog_enabled = true
+fog_light_color = Color(0.75, 0.82, 0.9, 1)
+fog_light_energy = 0.6
+fog_density = 0.003
+fog_aerial_perspective = 0.2
+
+[node name="World" type="Node3D" unique_id=1717403229]
+script = ExtResource("1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=941891005]
+environment = SubResource("env")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=2106588938]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0.8, 0, -0.8, 0.6, 0, 30, 0)
+light_color = Color(1, 0.97, 0.9, 1)
+light_energy = 0.9
+light_angular_distance = 2.0
+shadow_enabled = true
+directional_shadow_max_distance = 80.0
+
+[node name="CityMap" parent="." unique_id=1711943869 instance=ExtResource("10")]
+
+[node name="Spawns" type="Node3D" parent="." unique_id=1851366618]
+
+[node name="S0" type="Marker3D" parent="Spawns" unique_id=1107190918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -30)
+
+[node name="S1" type="Marker3D" parent="Spawns" unique_id=359330785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 1.2, -18)
+
+[node name="S2" type="Marker3D" parent="Spawns" unique_id=1806890706]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 1.2, 18)
+
+[node name="S3" type="Marker3D" parent="Spawns" unique_id=841839762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 30)
+
+[node name="S4" type="Marker3D" parent="Spawns" unique_id=735109278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 1.2, 18)
+
+[node name="S5" type="Marker3D" parent="Spawns" unique_id=1494089023]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 1.2, -18)
+
+[node name="S6" type="Marker3D" parent="Spawns" unique_id=957470523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+
+[node name="Players" type="Node3D" parent="." unique_id=950954435]
+
+[node name="HUD" type="Control" parent="." unique_id=1060914708]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("5")
+
+[node name="HPPanel" type="Panel" parent="HUD" unique_id=1619196461]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -60.0
+offset_right = 320.0
+offset_bottom = -38.0
+
+[node name="HPBar" type="ProgressBar" parent="HUD/HPPanel" unique_id=1503365551]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+value = 100.0
+show_percentage = false
+
+[node name="HPLabel" type="Label" parent="HUD/HPPanel" unique_id=764608267]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = -4.0
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ARPanel" type="Panel" parent="HUD" unique_id=1578353038]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -34.0
+offset_right = 320.0
+offset_bottom = -12.0
+
+[node name="ARBar" type="ProgressBar" parent="HUD/ARPanel" unique_id=1452332690]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="ARLabel" type="Label" parent="HUD/ARPanel" unique_id=196299261]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = -4.0
+text = "50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HurtRect" type="ColorRect" parent="HUD" unique_id=1877016474]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.8, 0, 0, 0)
+
+[node name="KillFeed" type="VBoxContainer" parent="HUD" unique_id=1542156511]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 400.0
+mouse_filter = 2
+alignment = 1
+
+[node name="RespawnBox" type="Panel" parent="HUD" unique_id=1314725259]
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -60.0
+offset_right = 180.0
+offset_bottom = 60.0
+
+[node name="Label" type="Label" parent="HUD/RespawnBox" unique_id=1527721653]
+layout_mode = 0
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 40.0
+text = "Возрождение..."
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="HUD/RespawnBox" unique_id=253274605]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -50.0
+offset_right = 80.0
+offset_bottom = -15.0
+disabled = true
+text = "Возродиться"
